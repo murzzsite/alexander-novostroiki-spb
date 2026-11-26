@@ -146,11 +146,13 @@ const YM_ID = 0;
     svg.addEventListener('keydown', e => { const z = e.target.closest('.zone'); if (z && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); select(z.dataset.id); } });
     /* приближение центра города */
     const zb = $('mapZoom'); let zoomed = false, raf = 0;
+    let baseFs = 0;
     const tweenVB = (to) => {
+      if (!baseFs) { label.style.fontSize = ''; baseFs = parseFloat(getComputedStyle(label).fontSize) || 21; }
       const from = svg.getAttribute('viewBox').split(' ').map(Number), t0 = performance.now(), dur = reduce ? 1 : 450;
       cancelAnimationFrame(raf);
       const f = now => { const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
-        const vb = from.map((v, i) => v + (to[i] - v) * e); svg.setAttribute('viewBox', vb.map(v => v.toFixed(1)).join(' ')); label.style.fontSize = (21 * vb[2] / vb0[2]).toFixed(2) + 'px'; label.style.strokeWidth = (6 * vb[2] / vb0[2]).toFixed(2) + 'px'; if (k < 1) raf = requestAnimationFrame(f); };
+        const vb = from.map((v, i) => v + (to[i] - v) * e); svg.setAttribute('viewBox', vb.map(v => v.toFixed(1)).join(' ')); label.style.fontSize = (baseFs * vb[2] / vb0[2]).toFixed(2) + 'px'; label.style.strokeWidth = (6 * vb[2] / vb0[2]).toFixed(2) + 'px'; if (k < 1) raf = requestAnimationFrame(f); };
       raf = requestAnimationFrame(f);
     };
     if (zb) zb.addEventListener('click', () => {
