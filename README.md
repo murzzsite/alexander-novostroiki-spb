@@ -1,1 +1,1 @@
-Лендинг: брокер по новостройкам СПб и ЛО. Ref заявок: YX7MEERTPQ. Фото: Wikimedia Commons (credits в assets/credits.json).
+Лендинг: брокер по новостройкам СПб, ЛО и Москва. Ref заявок: YX7MEERTPQ. Фото: Wikimedia Commons (credits в assets/credits.json). Границы районов на схеме: OpenStreetMap (ODbL), упрощены, файл map-data.js.
